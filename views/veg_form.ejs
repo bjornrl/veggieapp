@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+    <h1><%= title %></h1>
+
+    <form action='' method="POST">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input id="name" class="form-control" type="text" placeholder="Vegetable" name="name" required="true" value="<%=(typeof veg === 'undefined') ? '' : veg.name%>">
+      </div>
+
+      <div class="form-group">
+        <label for="species">Species: </label>
+        <input id="species" class="form-control" type="text" placeholder="Vege vegetalis" name="species" required='true' value="<%=(typeof veg === 'undefined') ? '' : veg.species%>">
+        <!-- <%=(typeof veg === 'undefined') ? '' : veg.species%> -->
+      </input>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description: </label>
+        <textarea id="description" class="form-control" type="textarea" placeholder="This vegetable..." name="description" required='true' value="<%=(typeof veg === 'undefined') ? '' : veg.description%>"><%=(typeof veg === 'undefined') ? '' : veg.description%></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="sow-month">Sowing months: </label>
+        <div class="sow-month-checkboxes">
+          <% months.forEach(month => {%>
+            <div style='display: inline; position: relative;'>
+              <label class="checkbox-label" for-'<%=month._id%>'><%=month.name.slice(0,1)%></label>
+              <input id="<%=month._id%>" class="checkbox-input" type="checkbox" name="sow" value="<%=month._id%>"
+              selected='
+              <%=(typeof veg === 'undefined') ? '' : (veg.sow.some((x) => x.name == month.name)) ? 'true' : 'false'%>
+              '
+              <%=(typeof veg === 'undefined') ? '' : (veg.sow.some((x) => x.name == month.name)) ? 'checked' : ''%>
+              >
+            </div>
+          <%});%>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="harvest-month">Harvesting months: </label>
+        <div class="harvest-month-checkboxes">
+          <% months.forEach(month => {%>
+            <div style='display: inline;  position: relative;'>
+              <label class="checkbox-label" for-'<%=month._id%>'><%=month.name.slice(0,1)%></label>
+              <input id="<%=month._id%>" class="checkbox-input" type="checkbox" name="harvest" value="<%=month._id%>" selected='
+              <%=(typeof veg === 'undefined') ? '' : (veg.harvest.some((x) => x.name == month.name)) ? 'true' : 'false'%>
+              '
+              <%=(typeof veg === 'undefined') ? '' :(veg.harvest.some((x) => x.name == month.name)) ? 'checked' : ''%>
+              >
+            </div>
+          <%});%>
+        </div>
+      </div>
+
+
+
+      <div class="form-group">
+        <label for="maturation">Maturation:</label>
+        <input id="maturation" class="form-control" type="text" placeholder="00" name="maturation" required='true' value="<%=(typeof veg === 'undefined') ? '' : veg.maturation%>">
+      </div>
+
+      <div class="form-group">
+        <label for="stock">Stock: </label>
+        <input id="stock" class="form-control" type="text" placeholder="00" name="stock" required='true' value="<%=(typeof veg === 'undefined') ? '1' : veg.stock%>">
+      </div>
+
+      <div class="form-group">
+        <input id="vegid" class="form-control" type="hidden" name="vegid" required="true" value="<%=(typeof veg === 'undefined') ? '' : veg._id%>">
+      </div>
+
+      <button class='btn btn-primary' type="submit">Submit</button>
+    </form>
+
+      <% var errors; if (errors) {%>
+      <ul>
+        <% errors.forEach(error => {%>
+        <li>
+          <%=error.msg%>
+        </li>
+        <%});%>
+      </ul>
+      <% } %>
+
+
+
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>

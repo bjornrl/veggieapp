@@ -2,10 +2,74 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include('head'); %>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <%- include('header'); %>
+    <main>
+      <br />
+
+      <div class="month-wheel-container">
+        <div
+          class="month-wheel"
+          style="transform: rotate(<%=(30 * new Date() .getMonth()) %>deg)"
+        >
+          <% if (typeof data.months) { %> <% data.months.forEach(month => { %>
+          <div
+            class="month"
+            style="
+              transform: rotate(<%=30 * (data.months.indexOf(month)) %>deg);
+            "
+          >
+            <a href="month/<%=month.name%>"><%=month.name%></a>
+          </div>
+          <div
+            class="month-wheel-line"
+            style="
+              transform: rotate(<%=(30 * (data.months.indexOf(month)))-15%>deg);
+            "
+          ></div>
+          <% }); } %>
+        </div>
+
+        <div class="harvest-list-breaker"></div>
+        <div class="harvest-list-breaker2"></div>
+
+        <div class="harvest-list-container">
+          <div class="harvest-list-inner">
+            <% data.vegs.forEach(veg => { %> <% if
+            (veg.harvest.includes(currentMonth.id)) {%>
+            <a href="/veg/<%=veg.name%>"><%=veg.name%></a
+            ><span class="comma">,</span>
+            <% }; }); %>
+          </div>
+          <div class="harvest-list">Time to Harvest ^</div>
+        </div>
+        <div class="sow-list-container">
+          <div class="sow-list">
+            Time to Sow
+            <span style="display: inline-block; transform: scaleY(-1)">^</span>
+            <div class="sow-list-inner">
+              <% data.vegs.forEach(veg => { %> <% if
+              (veg.sow.includes(currentMonth.id)) {%>
+              <a href="/veg/<%=veg.name%>"><%=veg.name%></a
+              ><span class="comma">,</span>
+              <% }; }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-page-tail">
+        <br />
+        <% for (let i = 10; i > 0; i--) { %>
+        <div
+          class="main-page-tail-part"
+          style="width: <%=(i * 10) + i * i%>px"
+        ></div>
+        <% }; %>
+      </div>
+    </main>
+    <%- include('footer'); %>
   </body>
 </html>

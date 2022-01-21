@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+      <h1><%= title %></h1>
+
+      <!-- <p><%=vegs%></p> -->
+
+      <% if (vegs == 0) {%>
+      <p>Hmm, it appears there are no vegetables.</p>
+      <% } else { %>
+      <p>These are all the vegetables we monitor:</p>
+      <p class="veg-listing">
+        <% vegs.forEach(veg => {%>
+        <a href="veg/<%=veg.name%>"><%=veg.name%></a>
+        <em>(<%=veg.species%>)</em><%=vegs.indexOf(veg) == vegs.length-1 ? '' :
+        ','%> <%});%>
+      </p>
+      <% } %>
+
+      <p>
+        <a class="left-thorny-underline" href="veg/create">Add a new one.</a>
+      </p>
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>

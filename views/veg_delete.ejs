@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+      <h1 style="display: inline-block"><%= title %></h1>
+      <h3 style="display: inline-block"><em><%= veg.species %></em></h3>
+
+      <p>"<%=veg.description%>"</p>
+
+      <p>Are you sure you want to delete <%=veg.name%> from the system?</p>
+
+      <form action="" method="POST">
+        <div class="form-group">
+          <input
+            id="vegid"
+            class="form-control"
+            type="hidden"
+            name="vegid"
+            required="true"
+            value="<%=veg._id%>"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Delete</button>
+      </form>
+
+      <br />
+      <a href="/veg/<%=veg.name%>" class="left-thorny-underline">Go back.</a>
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>

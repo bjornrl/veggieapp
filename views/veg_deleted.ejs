@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+      <h1>Success!</h1>
+
+      <p><%=veg_name%> deleted from the system.</p>
+
+      <p>
+        <a href="/veg_list" class="left-thorny-underline"
+          >Go back to list of veg.</a
+        >
+      </p>
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>

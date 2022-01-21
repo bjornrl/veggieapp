@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+      <h1 style="display: inline-block"><%= veg.name %></h1>
+      <h3 style="display: inline-block"><em><%= veg.species %></em></h3>
+
+      <span class="month-subtitle right-thorny-underline"
+        ><%='Add Photo'%></span
+      >
+
+      <p>Thank you for uploading this beautiful image:</p>
+
+      <img class="veg-image" src="/uploads/<%=file.filename%>" />
+      <a href="/<%=file.path%>">link</a>
+      <br />
+      <a href="/veg/<%=veg.name%>" class="left-thorny-underline"
+        >Go to the <%=veg.name%>.</a
+      >
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>

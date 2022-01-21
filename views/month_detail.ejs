@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- include('head'); %>
+  </head>
+  <body>
+    <%- include('header'); %>
+    <main>
+      <h1 style="display: inline-block"><%= title %></h1>
+
+      <!-- <p><%=month%></p> -->
+
+      <span class="month-subtitle right-thorny-underline"
+        ><%=(["January", "June", "July", "December"].some((x) => x ==
+        month.name)) ? '' : 'The '%><%=month.old_english%></span
+      >
+      <span class="month-subsubtitle"
+        ><%=(month.name == "June") ? "(First Summer)" : (month.name == "July") ?
+        "(Second Summer)" : "";%></span
+      >
+
+      <%if (sow_veg.length == 0) {%>
+      <p><span class="left-thorny-underline">Nothing is ready to sow!</span></p>
+      <% } else { %>
+      <p>
+        <span class="left-thorny-underline">It's time to sow your: </span>
+        <% sow_veg.forEach(veg => {%>
+        <li class="month-vegs">
+          <a href="/veg/<%=veg.name%>"><%=veg.name%>s</a><%=
+          (sow_veg.indexOf(veg) != sow_veg.length-1) ? "," : '' %>
+        </li>
+        <%});%>
+      </p>
+      <% } %> <%if (harvest_veg.length == 0) {%>
+      <p>
+        <span class="left-thorny-underline alt"
+          >Nothing is ready to harvest!</span
+        >
+      </p>
+      <% } else { %>
+      <p>
+        <span class="left-thorny-underline alt"
+          ><%= sow_veg.length == 0 ? "but it's" : '&' %> time to harvest your:
+        </span>
+        <% harvest_veg.forEach(veg => {%>
+        <li class="month-vegs">
+          <a href="/veg/<%=veg.name%>"
+            ><%=veg.name%><%=(veg.name.slice(-1)=='o')?'e':'';%>s</a
+          ><%= (harvest_veg.indexOf(veg) != harvest_veg.length-1) ? "," : '' %>
+        </li>
+        <%});%>
+      </p>
+      <% } %>
+    </main>
+    <%- include('footer'); %>
+  </body>
+</html>
